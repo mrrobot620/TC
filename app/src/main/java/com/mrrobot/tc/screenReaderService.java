@@ -103,7 +103,7 @@ public class screenReaderService extends AccessibilityService {
         if (gridCode != null) {
             String real = regexFinder("\\| ([^\\s|]+) \\| [^\\s|]+ \\| ([^\\s|]+)", gridCode);
             saveGridCode(real);
-            Log.d("XX", "Clicked Real:  " + real);
+          Log.d("XX", "Clicked Real:  " + real);
         }
 
 

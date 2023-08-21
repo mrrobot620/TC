@@ -1,15 +1,22 @@
 package com.mrrobot.tc;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.elevation.SurfaceColors;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,8 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private int gridCodeCounter = 0;
     private RecyclerView recyclerView;
     private GridCodeAdapter adapter;
+
     private List<GridCodeEntry> gridCodeList;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +45,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
+            getWindow().setStatusBarColor(SurfaceColors.SURFACE_2.getColor(this));
+        }
 
-        Button btn1 = findViewById(R.id.clearbtn);
-        Button btn2 = findViewById(R.id.refreshbtn);
+        if(!isNightMode(this)){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+
+
+
+
+        FloatingActionButton btn1 = findViewById(R.id.clearbtn);
+        FloatingActionButton btn2 = findViewById(R.id.refreshbtn);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         loadGridCodes();
+    }
+    public boolean isNightMode(Context context) {
+        int nightModeFlags = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
     }
 
 }

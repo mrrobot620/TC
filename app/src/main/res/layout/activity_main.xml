@@ -1,57 +1,63 @@
-<!-- res/layout/item_grid_code.xml -->
-<!-- res/layout/item_grid_code.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="8dp">
+    tools:context=".MainActivity">
 
-    <androidx.cardview.widget.CardView
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="431dp"
-        android:layout_margin="10dp"
-        android:focusableInTouchMode="true"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="20dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/framelayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
         <LinearLayout
-            android:layout_width="358dp"
-            android:layout_height="383dp"
-            android:layout_gravity="center_horizontal"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
+            android:layout_gravity="bottom|end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="5dp">
+            >
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="423dp"
-                app:layout_constraintBottom_toTopOf="@+id/clearbtn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.254" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/refreshbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginRight="30dp"
+                android:backgroundTint="#50C555"
+                android:src="@drawable/baseline_refresh_24"/>
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/clearbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_gravity="bottom|end"
+                android:backgroundTint="#DF4D4D"
 
+                android:src="@drawable/baseline_delete_forever_24" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/clearbtn"
-        android:layout_width="148dp"
-        android:layout_height="48dp"
-        android:text="Clear Data"
-        android:layout_gravity="center"
-        />
 
-    <Button
-        android:id="@+id/refreshbtn"
-        android:layout_width="148dp"
-        android:layout_height="48dp"
-        android:text="Refresh"
-        android:layout_gravity="center"/>
 
+
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </LinearLayout>
